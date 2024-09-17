@@ -13,8 +13,8 @@ public class Util {
     }
 
     public static Connection getConnection() {
-        try (Connection connection = DriverManager.getConnection(url, login, password)) {
-            return connection;
+        try {
+            return DriverManager.getConnection(url, login, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
