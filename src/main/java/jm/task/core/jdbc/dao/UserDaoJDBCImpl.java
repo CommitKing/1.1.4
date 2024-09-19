@@ -114,7 +114,9 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public static void closeConnection() {
         try {
-            connection.close();
+            if (!connection.isClosed()) {
+                connection.close();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
