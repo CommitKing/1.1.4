@@ -58,7 +58,8 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.setByte(3, age);
             statement.executeUpdate();
             connection.commit();
-            System.out.println("User saved");
+            System.out.println("Пользователь сохранен в базу данных:");
+            System.out.println("Name: " + name + ", lastName: " + lastName + ", age: " + age);
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -113,12 +114,6 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public static void closeConnection() {
-        try {
-            if (!connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Util.closeConnection(connection);
     }
 }

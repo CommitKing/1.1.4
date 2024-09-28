@@ -57,4 +57,14 @@ public class Util {
 
         return configuration;
     }
+
+    public static void closeConnection(Connection connection) throws RuntimeException {
+        try {
+            if (!connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
