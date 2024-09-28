@@ -67,4 +67,14 @@ public class Util {
             throw new RuntimeException(e);
         }
     }
+
+    public static void closeSessionFactory(SessionFactory sessionFactory) throws RuntimeException {
+        try {
+            if (sessionFactory != null) {
+                sessionFactory.close();
+            }
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

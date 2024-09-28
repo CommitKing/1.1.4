@@ -1,6 +1,6 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
@@ -23,6 +23,7 @@ public class Main {
 
         userService.dropUsersTable();
 
-        UserDaoJDBCImpl.closeConnection();
+        UserDaoHibernateImpl.closeSessionFactory();
+
     }
 }

@@ -56,6 +56,8 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = new User(name, lastName, age);
             session.save(user);
             session.getTransaction().commit();
+            System.out.println("Пользователь сохранен:");
+            System.out.println(user);
         } catch (Exception e) {
             e.printStackTrace();
             sessionFactory.getCurrentSession().getTransaction().rollback();
@@ -66,7 +68,10 @@ public class UserDaoHibernateImpl implements UserDao {
     public void removeUserById(long id) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.delete(session.get(User.class, id));
+            User user = (User) session.get(User.class, id);
+            if (user != null) {
+                session.delete(session.get(User.class, id));
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,5 +104,9 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
             sessionFactory.getCurrentSession().getTransaction().rollback();
         }
+    }
+
+    public static void closeSessionFactory() {
+        Util.closeSessionFactory(sessionFactory);
     }
 }
